@@ -1,0 +1,167 @@
+<!-- <script setup>
+import { ref } from 'vue';
+import {useRouter} from 'vue-router';
+import axios from 'axios'
+import qs from 'querystring'
+import { ElMessage } from 'element-plus'
+let username=ref('')
+let password=ref('')
+const router=useRouter()
+function handleLogin(){
+        let data={
+            username:username.value,
+            password:password.value
+        }
+        axios.post("http://localhost:5213/LabB3/user/login",qs.stringify(data))
+        .then((res)=>{
+            if(res.data.code==200){
+            sessionStorage.setItem("username",username.value)
+            router.replace('/')
+            }else{
+                ElMessage.error(res.data.msg);
+            }
+        }
+        )
+}
+</script>-->
+<script setup>
+import { loadSlim } from "tsparticles-slim";
+import {ref} from 'vue';
+const particlesInit = async engine =>{
+  await loadSlim(engine);
+};
+const particlesLoaded = async container => {
+    console.log('Particles container loaded', container)
+}
+const options=ref({
+      background: {
+        color: {
+          value: '#000000'
+        }
+      },
+      fpsLimit: 120,
+      interactivity: {
+        events: {
+          onClick: {
+            enable: false,
+            mode: 'push'
+          },
+          onHover: {
+            enable: true,
+            mode: 'grab'
+          },
+          resize: true
+        },
+        modes: {
+          bubble: {
+            distance: 400,
+            duration: 2,
+            opacity: 0.8,
+            size: 40
+          },
+          push: {
+            quantity: 4
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4
+          },
+          grab:{
+            distance: 200,
+            duration: 0.4            
+          }
+        }
+      },
+      particles: {
+        color: {
+          value: '#Ffd700'
+        },
+        links: {
+          color: '#Ffd700',
+          distance: 150,
+          enable: true,
+          opacity: 0.6,
+          width: 1
+        },
+        collisions: {
+          enable: true
+        },
+        move: {
+          direction: 'none',
+          enable: true,
+          outModes: {
+            default: 'bounce'
+          },
+          random: false,
+          speed: 1,
+          straight: false
+        },
+        number: {
+          density: {
+            enable: true,
+            area: 800
+          },
+          value: 80
+        },
+        opacity: {
+          value: 0.6
+        },
+        shape: {
+          type: 'star'
+        },
+        size: {
+          value: { min: 1, max: 5 }
+        }
+      },
+      detectRetina: true
+    })
+                     
+</script>
+<template>
+  <div>
+    <div class="loginblock">
+      <el-card  class="card"  style="opacity:0.96;" shadow="always">
+        <img src="../assets/OIP-C.jpg"  style="width: 30%; margin-inline-start:30% ;border-radius:100%;
+          filter: drop-shadow(3px 3px 6px #000000 );" > <br>
+        <el-input v-model="username" style="width: 240px" placeholder="用户名" /><br><br>
+        <el-input
+         v-model="password"
+         style="width: 240px"
+         type="password"
+         placeholder="密码"
+         show-password
+         /><br><br>
+        <el-button type="primary" @click="handleLogin" style="margin-left: 50px;">登录</el-button> 
+        <el-button type="primary" @click="">注册</el-button>
+      </el-card>
+    </div>
+    <vue-particles id="tsparticles" class="particlebac" :particlesInit="particlesInit"
+      :particlesLoaded="particlesLoaded" :options="options" />
+  </div>
+</template>
+<style>
+.particlebac{
+  opacity: 0.9;
+  position: absolute;
+  z-index: 1;
+}
+.loginblock{
+  height: 300px;
+  margin-top: 250px;
+  width: 450px;
+  margin-left: 500px;
+  position: relative;
+  z-index: 999;
+}
+.card{
+  display:flex;
+  justify-content:center;
+	align-items:center;
+  width: 450px;
+  border-radius: 20px;
+  background:radial-gradient( hsl(54, 92%, 69%),#d6ecf0);
+}
+
+
+</style>
+
