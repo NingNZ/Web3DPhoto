@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/labdb
+    username: postgres
+    password: 123456
+server:
+  port: 5213
+  servlet:
+    context-path: /last

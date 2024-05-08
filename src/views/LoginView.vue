@@ -26,7 +26,11 @@ function handleLogin(){
 </script>-->
 <script setup>
 import { loadSlim } from "tsparticles-slim";
+import { ElMessage } from 'element-plus'
 import {ref} from 'vue';
+import {useRouter} from 'vue-router';
+import axios from 'axios'
+import qs from 'querystring'
 const particlesInit = async engine =>{
   await loadSlim(engine);
 };
@@ -115,7 +119,50 @@ const options=ref({
       },
       detectRetina: true
     })
-                     
+let username=ref('');
+let password=ref('');
+let userRegi=ref("");
+let passRegi=ref("");
+let DialogVisible =ref(false);
+const router=useRouter();
+function handleLogin() {
+  let data = {
+    username: username.value,
+    password: password.value,
+    access: ' ',
+  }
+  axios.post("http://localhost:5213/last/user/login", qs.stringify(data))
+    .then((res) => {
+      if (res.data.code == 200) {
+        sessionStorage.setItem("username", username.value),
+        sessionStorage.setItem("access",res.data.access);
+        router.replace('/about')
+      } else {
+        ElMessage.error(res.data.msg);
+      }
+    }
+    )
+}
+function handleRegi(){
+  let data1={
+    username: userRegi.value,
+    password: passRegi.value,
+    access: 'c'
+  }
+  axios.post("http://localhost:5213/last/user/register", qs.stringify(data1))
+    .then((res) => {
+      if (res.data.code == 200) {
+        router.replace('/')
+        ElMessage.success(res.data.msg);
+      } else {
+        ElMessage.error(res.data.msg);
+      }
+    }
+    )
+  DialogVisible.value=false;  
+};
+
+
 </script>
 <template>
   <div>
@@ -132,12 +179,33 @@ const options=ref({
          show-password
          /><br><br>
         <el-button type="primary" @click="handleLogin" style="margin-left: 50px;">登录</el-button> 
-        <el-button type="primary" @click="">注册</el-button>
+        <el-button type="primary" @click="DialogVisible=true;">注册</el-button>
       </el-card>
     </div>
     <vue-particles id="tsparticles" class="particlebac" :particlesInit="particlesInit"
       :particlesLoaded="particlesLoaded" :options="options" />
   </div>
+  <el-dialog
+    v-model="DialogVisible"
+    title="用户注册"
+    width="500"
+    align-center
+  >
+    <el-input v-model="userRegi" style="width: 240px;margin-left: 25%" placeholder="用户名" /><br><br>
+    <el-input
+         v-model="passRegi"
+         style="width: 240px;margin-left: 25%;"
+         type="password"
+         placeholder="密码"
+         show-password
+         /><br><br>
+        <div style="margin-inline-start: 70%;">
+        <el-button @click="DialogVisible = false;userRegi='';passRegi='';">取消</el-button>
+        <el-button type="primary"  @click="handleRegi">
+          确定
+        </el-button>
+       </div>
+  </el-dialog>
 </template>
 <style>
 .particlebac{
