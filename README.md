@@ -1,5 +1,8 @@
 # lab
-
+## 项目中所用图片皆来自网络
+## 使用前先npm i
+## 文件夹last是后端项目 vue是前端项目
+## .sql是数据库文件
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
