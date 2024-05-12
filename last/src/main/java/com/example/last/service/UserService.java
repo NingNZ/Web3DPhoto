@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     User checkLog(User user);
     Result register(User user);
+    Result changePassword(User user);
 }

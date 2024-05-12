@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
         userMapper.register(user.getUsername(),user.getPassword());
         return Result.Success("注册成功",'c');
     }
+
+    @Override
+    public Result changePassword(User user) {
+        userMapper.changePassword(user.getUsername(), user.getPassword());
+        return Result.OK("修改密码成功");
+    }
 }

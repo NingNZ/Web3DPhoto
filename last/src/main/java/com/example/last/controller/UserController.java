@@ -41,4 +41,14 @@ public class UserController {
             return Result.Failure("用户"+user.getUsername()+"已被注册");
         }
     }
+    @PostMapping("/change")
+    public Result changePassword(User user){
+        User ExistOne=null;
+        ExistOne=userService.checkLog(user);
+        if(ExistOne==null){
+            return Result.Failure("用户尚未注册");
+        }else{
+            return userService.changePassword(user);
+        }
+    }
 }

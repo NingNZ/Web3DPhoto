@@ -15,6 +15,9 @@ public class Result {
         System.out.println(perm+msg);
         return new Result(200,msg,perm);
     }
+    public static Result OK(String msg){
+        return new Result(200,msg,' ');
+    }
     public static Result Failure(String msg){
         return new Result(400,msg,' ');
     }
