@@ -79,13 +79,13 @@ COPY public.comments (cid, username, content) FROM stdin;
 --
 
 COPY public.photoset (id, address) FROM stdin;
-2	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\2.jpg
-1	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\1.jpg
-3	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\3.jpg
-4	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\4.jpg
-5	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\5.jpg
-6	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\6.jpg
-7	D:\\code\\IdeaProject\\last\\src\\main\\resources\\static\\7.jpg
+2	\\last\\src\\main\\resources\\static\\2.jpg
+1	\\last\\src\\main\\resources\\static\\1.jpg
+3	\\last\\src\\main\\resources\\static\\3.jpg
+4	\\last\\src\\main\\resources\\static\\4.jpg
+5	\\last\\src\\main\\resources\\static\\5.jpg
+6	\\last\\src\\main\\resources\\static\\6.jpg
+7	\\last\\src\\main\\resources\\static\\7.jpg
 \.
 
 
